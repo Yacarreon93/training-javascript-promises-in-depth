@@ -9,10 +9,14 @@ function getMovieTitles(films) {
     .join("\n");
 }
 
-fetch(API_URL + "films")
+fetch(API_URL + "movies")
   .then(response => {
     if (!response.ok) {
-      throw new Error("unsuccessful response");
+      /*
+        It's also possible to throw and error returning a rejected promise,
+        it's recommended to use an Error object as param to see the stack trace (helpful for debugging).
+      */
+      return Promise.reject(new Error("unsuccessful response"));
     }
 
     return response.json().then(films => {
